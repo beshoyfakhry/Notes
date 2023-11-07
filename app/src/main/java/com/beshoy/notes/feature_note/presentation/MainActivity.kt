@@ -1,4 +1,4 @@
-package com.beshoy.notes
+package com.beshoy.notes.feature_note.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -23,13 +23,11 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     Greeting("Android")
-                    //Comment 1
-                    //Comment 2
-                    //Comment 3
+
                 }
             }
         }
-    }
+    }q
 }
 
 @Composable
