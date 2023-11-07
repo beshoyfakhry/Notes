@@ -25,6 +25,7 @@ class MainActivity : ComponentActivity() {
                     Greeting("Android")
                     //Comment 1
                     //Comment 2
+                    //Comment 3
                 }
             }
         }
