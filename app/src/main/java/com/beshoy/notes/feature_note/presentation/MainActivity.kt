@@ -27,7 +27,7 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-    }q
+    }
 }
 
 @Composable
