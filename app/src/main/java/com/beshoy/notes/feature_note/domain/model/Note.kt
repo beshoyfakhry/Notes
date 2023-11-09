@@ -8,11 +8,11 @@ import com.beshoy.notes.ui.theme.Purple40
 
 @Entity
 data class Note(
-    val tittle: String,
+    val title: String,
     val content: String,
     val timeStamp: Long,
     val color: Int,
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     val id: Int
 
 ) {
@@ -20,5 +20,7 @@ data class Note(
 
         val noteColors = listOf(Blue, Red, Purple40)
     }
+
+    class InvalidNoteException(message: String) : Exception(message)
 
 }

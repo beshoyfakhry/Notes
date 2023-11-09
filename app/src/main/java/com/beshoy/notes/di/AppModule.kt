@@ -8,13 +8,15 @@ import com.beshoy.notes.feature_note.data.repository.NoteRepositoryImp
 import com.beshoy.notes.feature_note.domain.repository.NoteRepository
 import com.beshoy.notes.feature_note.domain.use_case.AddNotesUseCase
 import com.beshoy.notes.feature_note.domain.use_case.DeleteNotesUseCase
+import com.beshoy.notes.feature_note.domain.use_case.GetNoteUseCase
 import com.beshoy.notes.feature_note.domain.use_case.GetNotesUseCase
 import com.beshoy.notes.feature_note.domain.use_case.NoteUseCases
+import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
-
+@Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
@@ -30,6 +32,14 @@ object AppModule {
 
     }
 
+
+    @Provides
+    @Singleton
+    fun provideNoteDao(appDatabase: NoteDatabase): NoteDao {
+        return appDatabase.noteDao()
+    }
+
+
     @Provides
     @Singleton
     fun providesNoteRepository(dao: NoteDao): NoteRepository {
@@ -42,8 +52,11 @@ object AppModule {
         return NoteUseCases(
             DeleteNotesUseCase(repository),
             GetNotesUseCase(repository),
-            AddNotesUseCase(repository)
+            AddNotesUseCase(repository),
+            GetNoteUseCase(repository)
         )
     }
+
+
 
 }
