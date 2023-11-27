@@ -15,6 +15,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -28,10 +29,11 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.beshoy.notes.core.util.TestTags
 import com.beshoy.notes.feature_note.domain.model.Note
+import com.beshoy.notes.feature_note.presentation.add_edit_note.components.TransparentHintTextField
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import androidx.compose.material3.Scaffold
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -136,7 +138,9 @@ fun AddEditNoteScreen(
                 },
                 isHintVisible = titleState.isHintVisible,
                 singleLine = true,
-                textStyle = MaterialTheme.typography.bodyMedium
+                textStyle = MaterialTheme.typography.bodyMedium,
+                testTag = TestTags.TITLE_TEXT_FIELD
+
             )
             Spacer(modifier = Modifier.height(16.dp))
             TransparentHintTextField(
@@ -150,7 +154,8 @@ fun AddEditNoteScreen(
                 },
                 isHintVisible = contentState.isHintVisible,
                 textStyle = MaterialTheme.typography.bodyLarge,
-                modifier = Modifier.fillMaxHeight()
+                modifier = Modifier.fillMaxHeight(),
+                testTag = TestTags.CONTENT_TEXT_FIELD
             )
         }
     }

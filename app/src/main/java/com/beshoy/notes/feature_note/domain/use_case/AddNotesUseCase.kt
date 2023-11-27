@@ -10,11 +10,11 @@ class AddNotesUseCase(private val repository: NoteRepository) {
     suspend operator fun invoke(note: Note) {
         if (note.title.isBlank()) {
 
-            throw Note.InvalidNoteException("Title can not be empty. ")
+            throw Note.InvalidNoteException("Title can not be empty.")
         }
         if (note.content.isBlank()) {
 
-            throw Note.InvalidNoteException("Content can not be empty. ")
+            throw Note.InvalidNoteException("Content can not be empty.")
         }
 
         repository.insertNote(note)

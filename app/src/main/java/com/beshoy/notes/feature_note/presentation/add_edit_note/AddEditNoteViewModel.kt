@@ -40,7 +40,7 @@ class AddEditNoteViewModel @Inject constructor(
     private val _eventFlow = MutableSharedFlow<UiEvent>()
     val eventFlow = _eventFlow.asSharedFlow()
 
-    private var currentNoteId: Int = 0
+    private var currentNoteId: Int? = null
 
     init {
         savedStateHandle.get<Int>("noteId")?.let { noteId ->
@@ -103,8 +103,8 @@ class AddEditNoteViewModel @Inject constructor(
                                 title = noteTitle.value.text,
                                 content = noteContent.value.text,
                                 timeStamp = System.currentTimeMillis(),
-                                color = noteColor.value
-                                , id= currentNoteId
+                                color = noteColor.value,
+                                id = currentNoteId
                             )
                         )
                         _eventFlow.emit(UiEvent.SaveNote)

@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.map
 
 class GetNotesUseCase(private val repository: NoteRepository) {
 
-   operator fun invoke(noteOrder: NoteOrder = NoteOrder.Date(OrderType.Ascending)): Flow<List<Note>> {
+    operator fun invoke(noteOrder: NoteOrder = NoteOrder.Date(OrderType.Ascending)): Flow<List<Note>> {
 
         return repository.getNotes().map { notes ->
             when (noteOrder.orderType) {
@@ -30,8 +30,6 @@ class GetNotesUseCase(private val repository: NoteRepository) {
                 }
 
             }
-
-
         }
     }
 }

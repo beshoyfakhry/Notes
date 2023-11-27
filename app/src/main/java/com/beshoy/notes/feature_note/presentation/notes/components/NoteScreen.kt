@@ -23,9 +23,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.beshoy.notes.core.util.TestTags
 import com.beshoy.notes.feature_note.presentation.notes.NotesEvent
 import com.beshoy.notes.feature_note.presentation.notes.NotesViewModel
 import com.beshoy.notes.feature_note.presentation.util.Screen
@@ -40,7 +42,7 @@ fun NotesScreen(
     viewModel: NotesViewModel = hiltViewModel()
 ) {
     val state = viewModel.state.value
-    val scaffoldState = SnackbarHostState()
+    var scaffoldState = SnackbarHostState()
     val scope = rememberCoroutineScope()
 
     Scaffold(
@@ -53,9 +55,10 @@ fun NotesScreen(
             ) {
                 Icon(imageVector = Icons.Default.Add, contentDescription = "Add note")
             }
+            scaffoldState = scaffoldState
         },
-      //  scaffoldState = scaffoldState
-    ) {
+
+        ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -89,7 +92,8 @@ fun NotesScreen(
                 OrderSection(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(vertical = 16.dp),
+                        .padding(vertical = 16.dp)
+                        .testTag(TestTags.ORDER_SECTION),
                     noteOrder = state.noteOrder,
                     onOrderChange = {
                         viewModel.onEvent(NotesEvent.Order(it))
@@ -116,7 +120,7 @@ fun NotesScreen(
                                     message = "Note deleted",
                                     actionLabel = "Undo"
                                 )
-                                if(result == SnackbarResult.ActionPerformed) {
+                                if (result == SnackbarResult.ActionPerformed) {
                                     viewModel.onEvent(NotesEvent.RestoreNote)
                                 }
                             }
